@@ -4,12 +4,13 @@ namespace DotNetCoreMySql.Models
 {
     public class User
     {
+        public ulong userId { get; }
         public string UserName { get; }
         public string EmailAddress { get; }
         public ushort Age { get; }
         public DateTime DateOfBirth { get; }
 
-        public User(string userName, string emailAddress, ushort age, DateTime dateOfBirth)
+        public User(ulong userId, string userName, string emailAddress, ushort age, DateTime dateOfBirth)
         {
             UserName = userName;
             EmailAddress = emailAddress;
