@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace DotNetCoreMySql.Dao.UserDataAccess
 {
-    public interface IUserDataAccess
+    public interface IUserDataAccess : IDisposable
     {
         Task<ulong> CreateUserAsync(string userName, string emailAddress, ushort age, DateTime dateOfBirth);
 
