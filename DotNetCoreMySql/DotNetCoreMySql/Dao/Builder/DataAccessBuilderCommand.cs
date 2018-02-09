@@ -34,7 +34,7 @@ namespace DotNetCoreMySql.Dao.Builder
             return this;
         }
 
-        public IDataAccessBuilderCommand WithOutputParameter(string parameterName, MySqlDbType type, object value)
+        public IDataAccessBuilderCommand WithOutputParameter(string parameterName, MySqlDbType type)
         {
             MySqlParameter parameter = new MySqlParameter(parameterName, type);
             parameter.Direction = ParameterDirection.Output;
@@ -43,19 +43,25 @@ namespace DotNetCoreMySql.Dao.Builder
             return this;
         }
 
-        public async Task ExecuteNonQueryAsync()
+        public async Task<DataAccessResult> ExecuteNonQueryAsync()
         {
             await _command.ExecuteNonQueryAsync();
+
+            return new DataAccessResult(_command);
         }
 
-        public async Task<DbDataReader> ExecuteReaderAsync()
+        public async Task<DataAccessResult> ExecuteReaderAsync()
         {
-            return await _command.ExecuteReaderAsync();
+            DbDataReader reader = await _command.ExecuteReaderAsync();
+
+            return new DataAccessResult(_command, reader);
         }
 
-        public async Task<object> ExecuteScalarAsync()
+        public async Task<DataAccessResult> ExecuteScalarAsync()
         {
-            return await _command.ExecuteScalarAsync();
+            object value = await _command.ExecuteScalarAsync();
+
+            return new DataAccessResult(_command, value);
         }
 
         #endregion

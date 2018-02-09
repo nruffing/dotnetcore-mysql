@@ -8,12 +8,12 @@ namespace DotNetCoreMySql.Dao.Builder
     {
         IDataAccessBuilderCommand WithInputParameter(string parameterName, MySqlDbType type, object value);
 
-        IDataAccessBuilderCommand WithOutputParameter(string parameterName, MySqlDbType type, object value);
+        IDataAccessBuilderCommand WithOutputParameter(string parameterName, MySqlDbType type);
 
-        Task ExecuteNonQueryAsync();
+        Task<IDataAccessResult> ExecuteNonQueryAsync();
 
-        Task<object> ExecuteScalarAsync();
+        Task<IDataAccessResult> ExecuteScalarAsync();
 
-        Task<DbDataReader> ExecuteReaderAsync();
+        Task<IDataAccessResult> ExecuteReaderAsync();
     }
 }
